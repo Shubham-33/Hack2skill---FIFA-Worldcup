@@ -1,5 +1,10 @@
 # GateReady
 
+[![CI](https://github.com/Shubham-33/Hack2skill---FIFA-Worldcup/actions/workflows/ci.yml/badge.svg)](https://github.com/Shubham-33/Hack2skill---FIFA-Worldcup/actions/workflows/ci.yml)
+[![coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)](https://github.com/Shubham-33/Hack2skill---FIFA-Worldcup/actions/workflows/ci.yml)
+[![tests](https://img.shields.io/badge/tests-128-blue)](web/tests)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org)
+
 **Know before you go. Don't miss kickoff.**
 
 A multilingual, photo-based gate-readiness answer engine for the FIFA World Cup 2026.
