@@ -27,10 +27,24 @@ const GEMINI_MODEL = 'gemini-2.5-flash';
 const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 const NVIDIA_ENDPOINT = 'https://integrate.api.nvidia.com/v1/chat/completions';
 
-/** Time box for tier 1. Generous enough for vision, short enough to still fail over. */
-const GEMINI_TIMEOUT_MS = 15_000;
-/** Time box for tier 2. Tighter — it is already the fallback path. */
-const NVIDIA_TIMEOUT_MS = 8_000;
+/**
+ * Time boxes, tuned against measured behaviour rather than guessed.
+ *
+ * Gemini answers in ~1-5s when it works, and its free-tier 429 comes back in ~0.2s, so
+ * failover is effectively instant in the case that actually matters. 10s is ample.
+ *
+ * NVIDIA's budget is deliberately larger than tier 1's despite being the fallback. A
+ * warm model replies in under a second, but a *cold* one took a measured 20s — and the
+ * original 8s box aborted it every time, so tier 2 never once fired in production and
+ * every rate-limited request fell straight to the offline rules. 12s covers ordinary
+ * cold-start variance while keeping the worst case tolerable.
+ *
+ * A fully cold NVIDIA still exceeds this and lands on tier 3, which is the right
+ * trade: an instant correct answer from the rules beats a 20s wait for a prettier one.
+ * Warm tier 2 up with a single request before presenting.
+ */
+const GEMINI_TIMEOUT_MS = 10_000;
+const NVIDIA_TIMEOUT_MS = 12_000;
 
 const VALID_VERDICTS: readonly Verdict[] = ['allowed', 'not_allowed', 'check_with_staff'];
 
