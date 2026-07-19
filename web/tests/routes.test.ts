@@ -10,6 +10,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { POST } from '@/app/api/check/route';
 import { GET } from '@/app/api/ops/route';
 import { resetOpsLog } from '@/lib/oplog';
+import { resetSheetCache } from '@/lib/sheets';
 
 /** Build a Request with a JSON body. */
 function jsonRequest(body: unknown): Request {
@@ -133,5 +134,33 @@ describe('GET /api/ops', () => {
 
   it('sets no-store so intermediaries do not cache operational data', async () => {
     expect((await GET()).headers.get('Cache-Control')).toBe('no-store');
+  });
+});
+
+describe('GET /api/ops — policy source diagnostic', () => {
+  it('reports built-in rules when no Sheet is configured', async () => {
+    delete process.env.GOOGLE_SHEETS_ID;
+    const body = await (await GET()).json();
+    expect(body.policySource).toMatchObject({ live: false, source: 'built-in' });
+    expect(body.policySource.ruleCount).toBeGreaterThan(0);
+  });
+
+  it('reports the Google Sheet as the source when live rules are loaded', async () => {
+    process.env.GOOGLE_SHEETS_ID = 'sheet-id';
+    resetSheetCache();
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => ({
+        ok: true,
+        status: 200,
+        text: async () =>
+          'rule_id,item,verdict,reason\nSHEET-1,vuvuzela,not_allowed,Amplified noise',
+      })),
+    );
+    const body = await (await GET()).json();
+    expect(body.policySource).toMatchObject({ live: true, source: 'google-sheet', ruleCount: 1 });
+    resetSheetCache();
+    vi.unstubAllGlobals();
+    delete process.env.GOOGLE_SHEETS_ID;
   });
 });
