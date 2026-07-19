@@ -593,6 +593,46 @@ export function allAliases(rule: PolicyRule): string[] {
   return [rule.item, ...rule.aliases, ...(I18N_ALIASES[rule.ruleId] ?? [])];
 }
 
+// ---------------------------------------------------------------------------
+// Live overlay
+// ---------------------------------------------------------------------------
+
+/**
+ * Rules loaded from the Google Sheet, when available.
+ *
+ * `null` means no live data, in which case the seed rules above are authoritative.
+ * Keeping this as an overlay rather than mutating `POLICIES` means the fallback is
+ * always intact and a bad Sheet can never destroy the offline tier.
+ */
+let livePolicies: PolicyRule[] | null = null;
+
+/** Install (or clear, with `null`) rules fetched from the Sheet. */
+export function setLivePolicies(rules: PolicyRule[] | null): void {
+  livePolicies = rules && rules.length > 0 ? rules : null;
+}
+
+/** The rule set currently in force: live Sheet rows if loaded, otherwise the seed. */
+export function getActivePolicies(): readonly PolicyRule[] {
+  return livePolicies ?? POLICIES;
+}
+
+/** Whether answers are currently backed by live Sheet rows. */
+export function hasLivePolicies(): boolean {
+  return livePolicies !== null;
+}
+
+/**
+ * Look up a rule by id against the *active* set.
+ *
+ * Callers must not cache this in a module-level map. Citation integrity and operational
+ * aggregation both resolve rule ids, and if they held a snapshot taken at import time, a
+ * citation to a Sheet-only rule would look fabricated and be wrongly downgraded to
+ * `check_with_staff`.
+ */
+export function getRuleById(ruleId: string): PolicyRule | undefined {
+  return getActivePolicies().find((r) => r.ruleId === ruleId);
+}
+
 /** Default venue used when the client does not specify one. */
 export const DEFAULT_VENUE = VENUES[0].venue;
 
@@ -605,5 +645,5 @@ export function findVenue(name?: string): Venue {
 
 /** Policy rules applicable at a given venue (venue-specific plus tournament-wide). */
 export function policiesForVenue(venue: string): PolicyRule[] {
-  return POLICIES.filter((p) => p.venue === ALL_VENUES || p.venue === venue);
+  return getActivePolicies().filter((p) => p.venue === ALL_VENUES || p.venue === venue);
 }

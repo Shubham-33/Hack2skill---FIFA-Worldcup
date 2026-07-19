@@ -1,0 +1,47 @@
+rule_id,venue,item,aliases,verdict,condition,reason,fix,category
+ALL-1.1,ALL,clear bag,"transparent bag, clear tote, see-through bag, bolsa transparente, sac transparent",allowed,Max 30cm x 15cm x 30cm,Clear bags within the size limit are the standard permitted carry.,,bags
+ALL-1.2,ALL,backpack,"rucksack, knapsack, daypack, school bag, mochila, sac à dos, rucksack",not_allowed,,Non-transparent backpacks exceed the clear-bag policy.,"Use the bag check outside the gate, or transfer essentials to a clear bag.",bags
+ALL-1.3,ALL,small clutch,"purse, clutch bag, wristlet",allowed,"Max 12cm x 17cm, need not be transparent",One small personal clutch is permitted alongside a clear bag.,,bags
+ALL-1.4,ALL,diaper bag,"nappy bag, baby bag, changing bag",allowed,When accompanied by an infant; subject to search,Caregiver exemption applies when travelling with a child.,,bags
+ALL-2.1,ALL,power bank,"battery pack, portable charger, powerbank, power pack, batería externa, bateria externa, batterie externe, cargador portátil",allowed,Under 100Wh,Small lithium batteries are permitted under the venue fire-safety limit.,,electronics
+ALL-2.2,ALL,professional camera,"dslr, mirrorless camera, slr, professional lens, cámara profesional, câmera profissional, appareil photo",not_allowed,Detachable lens over 15cm,Professional imaging equipment requires media accreditation.,Phone and compact cameras are fine. Check larger gear at the bag check.,electronics
+ALL-2.3,ALL,tripod,"monopod, camera stand, gimbal, trípode, tripé, trépied",not_allowed,,Rigid poles obstruct sightlines and are a crowd-safety hazard.,Check it at the bag check before entering.,electronics
+ALL-2.4,ALL,selfie stick,"selfie pole, extension stick",not_allowed,,Extendable poles obstruct sightlines in seated bowls.,Leave it at your accommodation or check it at the bag check.,electronics
+ALL-2.5,ALL,laptop,"notebook computer, macbook",not_allowed,,Laptops exceed permitted electronics for general admission.,Check it at the bag check; tablets under 25cm are permitted.,electronics
+ALL-2.11,ALL,smartphone,"phone, mobile, mobile phone, cell phone, iphone, android",allowed,,Phones are permitted and are the recommended way to carry your ticket.,,electronics
+ALL-2.12,ALL,charging cable,"cable, usb cable, charger cable, lead, cord",allowed,,Charging cables are permitted alongside a compliant power bank.,,electronics
+ALL-2.13,ALL,keys,"house keys, car keys, keyring",allowed,,Personal keys are permitted and subject to routine screening.,,personal
+ALL-2.14,ALL,wallet,"purse wallet, card holder, billfold",allowed,,Wallets are permitted; most venues are contactless-only at concessions.,,personal
+ALL-2.6,ALL,tablet,"ipad, e-reader, kindle",allowed,Under 25cm diagonal,Small tablets are permitted and subject to search.,,electronics
+ALL-2.7,ALL,drone,"quadcopter, uav",not_allowed,,Unmanned aircraft are prohibited in and around the security perimeter.,There is no check facility for drones. Do not bring one to the venue.,prohibited
+ALL-2.8,ALL,laser pointer,laser pen,not_allowed,,Lasers endanger players and officials and carry ejection penalties.,,prohibited
+ALL-2.9,ALL,noise cancelling headphones,"headphones, ear defenders, earmuffs, noise cancelling",allowed,,Hearing protection is permitted and encouraged for sensory comfort.,,accessibility
+ALL-2.10,ALL,earplugs,"ear plugs, foam plugs",allowed,,Hearing protection is permitted.,,accessibility
+ALL-3.1,ALL,sealed water bottle,"unopened water, sealed bottle, botella de agua, garrafa de água, bouteille d’eau, agua sellada",not_allowed,,Sealed liquids cannot be verified at screening.,Bring an empty reusable bottle and fill it at a free water point inside.,food_drink
+ALL-3.2,ALL,empty reusable bottle,"empty bottle, reusable bottle, water bottle empty, flask, botella vacía, garrafa vazia, bouteille vide",allowed,"Empty, max 1L, non-glass",Empty vessels are permitted and support the tournament waste-reduction goal.,,sustainability
+ALL-3.3,ALL,baby formula,"infant formula, baby milk, breast milk, baby food",allowed,When travelling with an infant,Infant feeding supplies are exempt from the liquids restriction.,,medical
+ALL-3.4,ALL,snacks,"food, sandwich, chips, crisps",check_with_staff,,Outside food rules vary by venue and by ticket type.,Ask at the gate. Sealed single-serve snacks are usually fine.,food_drink
+ALL-3.5,ALL,alcohol,"beer, wine, spirits, liquor",not_allowed,,Outside alcohol is prohibited at all venues.,,prohibited
+ALL-4.1,ALL,insulin pen,"insulin, diabetes kit, glucose monitor, insulin pump, insulina, pluma de insulina, caneta de insulina, stylo à insuline",check_with_staff,,Medical exemptions exist but must be processed in person so your equipment is not delayed at general screening.,Use the medical lane. Bring the prescription label if you have it.,medical
+ALL-4.2,ALL,epipen,"epi pen, adrenaline auto-injector, anaphylaxis pen",check_with_staff,,Auto-injectors are permitted but should be declared so staff can assist in an emergency.,Declare it at the medical lane on arrival.,medical
+ALL-4.3,ALL,prescription medication,"medication, prescription, pills, medicine, tablets medicine, medicamento, medicamentos, medicação, médicaments, receta",check_with_staff,,Quantities and packaging requirements vary; staff verification avoids a refusal at the gate.,Keep medication in labelled original packaging and use the medical lane.,medical
+ALL-4.4,ALL,crutches,"walking stick, cane, walker, walking frame, muletas, béquilles, bastón",allowed,,Mobility aids are always permitted.,,accessibility
+ALL-4.5,ALL,wheelchair,"manual wheelchair, powered wheelchair, mobility scooter, silla de ruedas, cadeira de rodas, fauteuil roulant",allowed,,Wheelchairs are always permitted; use the accessible gate for step-free entry.,,accessibility
+ALL-4.6,ALL,service animal,"guide dog, assistance dog, service dog, perro guía, cão-guia, chien guide, perro de servicio",allowed,,Trained service animals are permitted at all venues.,,accessibility
+ALL-4.7,ALL,emotional support animal,"support animal, comfort animal, therapy animal, pet",check_with_staff,,Emotional support animals are treated differently from service animals and the rules vary by host country.,Contact venue accessibility services before match day.,accessibility
+ALL-5.1,ALL,flag with pole,"flagpole, flag pole, banner pole, bandera con asta, bandeira com mastro, drapeau avec mât, mastro, asta",not_allowed,,Rigid poles are a crowd-safety hazard.,Bring the flag without the pole — flags themselves are welcome.,fan_gear
+ALL-5.2,ALL,flag without pole,"flag, national flag, fabric flag, bandera, bandeira, drapeau, fahne",allowed,"Max 2m x 1.5m, must not obstruct other spectators",Flags are permitted and encouraged.,,fan_gear
+ALL-5.3,ALL,air horn,"airhorn, klaxon, vuvuzela, horn",not_allowed,,Amplified noise devices interfere with safety announcements.,,prohibited
+ALL-5.4,ALL,drum,"percussion, bongo",check_with_staff,,Instruments are permitted only in designated supporter sections.,Confirm with your supporters group and the venue before match day.,fan_gear
+ALL-5.5,ALL,banner,"tifo, sign, placard",check_with_staff,Large banners require prior approval,Banner size and content require stewarding approval.,Submit large banners to venue operations in advance.,fan_gear
+ALL-5.6,ALL,umbrella,"brolly, parasol, paraguas, guarda-chuva, parapluie, sombrilla",not_allowed,,Umbrellas obstruct sightlines and their spokes are a hazard in dense crowds.,Bring a poncho or rain jacket instead.,fan_gear
+ALL-5.7,ALL,folding chair,"camping chair, stool, portable chair",not_allowed,,Furniture obstructs egress routes.,,prohibited
+ALL-5.8,ALL,seat cushion,"cushion, seat pad",allowed,"Soft, no pockets, no metal frame",Soft cushions without storage are permitted.,,fan_gear
+ALL-6.1,ALL,aerosol sunscreen,"spray sunscreen, aerosol, spray can",not_allowed,,Pressurised aerosols are prohibited.,Bring lotion sunscreen instead — under 100ml is permitted.,prohibited
+ALL-6.2,ALL,lotion sunscreen,"sunscreen, sun cream, sunblock",allowed,"Non-aerosol, under 100ml",Non-pressurised sun protection is permitted.,,health
+ALL-6.3,ALL,vape,"e-cigarette, vape pen, juul, electronic cigarette, cigarrillo electrónico, cigarro eletrônico, cigarette électronique",not_allowed,,Vaping devices are prohibited inside the bowl at all venues.,,prohibited
+ALL-6.4,ALL,lighter,"matches, flame, zippo, encendedor, isqueiro, briquet, mechero",not_allowed,,Ignition sources and pyrotechnics are strictly prohibited.,,prohibited
+ALL-6.5,ALL,cash,"money, banknotes, coins",check_with_staff,,Many venues are cashless; cash may not be accepted at concessions.,Bring a contactless card or phone wallet as your primary payment.,payments
+MET-7.1,MetLife Stadium,transit card,"metrocard, rail ticket, njt ticket",allowed,,Rail is the recommended approach; keep your return ticket accessible.,,transport
+AZT-7.1,Estadio Azteca,altitude medication,"soroche, altitude sickness tablets",check_with_staff,,"Mexico City sits at 2,240m. Medication is permitted but should be declared.",Declare it at the medical lane on arrival.,medical
+ALL-6.6,ALL,stroller,"pushchair, pram, buggy, carrito de bebé, carrinho de bebê, poussette, cochecito",check_with_staff,,Stroller policy depends on your seating area and the venue.,Most venues offer stroller parking near the accessible gate — confirm on arrival.,accessibility

@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/Shubham-33/Hack2skill---FIFA-Worldcup/actions/workflows/ci.yml/badge.svg)](https://github.com/Shubham-33/Hack2skill---FIFA-Worldcup/actions/workflows/ci.yml)
 [![coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)](https://github.com/Shubham-33/Hack2skill---FIFA-Worldcup/actions/workflows/ci.yml)
-[![tests](https://img.shields.io/badge/tests-128-blue)](web/tests)
+[![tests](https://img.shields.io/badge/tests-157-blue)](web/tests)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org)
 [![lighthouse](https://img.shields.io/badge/lighthouse-a11y%20100%20%C2%B7%20perf%2098-brightgreen)](https://hack2skill-fifa-worldcup.vercel.app)
 
@@ -96,10 +96,18 @@ Which tier answered is always shown in the UI. Degradation is visible, never sil
 All free, none requiring a billing account:
 
 - **Gemini API** (AI Studio) — vision, text, structured output
-- **Google Sheets** — policy database schema
+- **Google Sheets** — live policy database; edit a row and the change is in force within 60s, no redeploy
 - **Google Calendar** — URL-spec dispatch, zero auth; the fan's personalised checklist lands in their calendar
 - **Google Maps** — URL-spec directions links, zero auth
 - **Google Fonts** — self-hosted at build time via `next/font`
+
+> **Sheets uses the CSV export of a link-shared spreadsheet, not the Sheets API.** A
+> service account would mean a private key in an environment variable, an extra
+> dependency, and an IAM step; a link-shared Sheet reads with no credentials at all —
+> one fewer secret to leak, and an ops lead can grant access without a console. The
+> Sheet is world-readable, which is appropriate: gate policy is printed on signage.
+> Every failure path — no ID, unreachable, non-2xx, malformed, or zero usable rows —
+> falls back to the in-repo rules, so a broken Sheet costs freshness, never availability.
 
 > Calendar and Maps use URL-spec endpoints rather than OAuth. Identical result for the
 > user, no consent screen, no token storage, no refresh logic. Maps Platform's JS SDK
@@ -131,7 +139,7 @@ It runs **without any API key** — you'll be served by the deterministic tier, 
 the point of having one.
 
 ```bash
-npm run test:cov   # 128 tests, 100% coverage gate
+npm run test:cov   # 157 tests, 100% coverage gate
 npx tsc --noEmit   # types
 npx eslint .       # lint
 npm run build      # production build
@@ -178,7 +186,7 @@ Measured against the deployed URL, not a local build:
 | Lighthouse Performance | **98** |
 | Console errors | **0** |
 | Hydration | verified by clicking through the flow in headless Chrome |
-| Tests | 128 passing, 100% coverage gate, no API key required |
+| Tests | 157 passing, 100% coverage gate, no API key required |
 
 > One bug this caught: an earlier `script-src 'self'` CSP blocked Next.js's own inline
 > bootstrap scripts. The page returned 200, the API answered `curl` correctly, and

@@ -16,7 +16,7 @@
  */
 
 import { deterministicCheck, buildAccessGuidance, buildStaffScript } from './deterministic';
-import { findVenue, policiesForVenue, POLICIES } from './policies';
+import { findVenue, getRuleById, policiesForVenue } from './policies';
 import type { AccessProfile, CheckResponse, ItemVerdict, Mode, Tier, Verdict } from './types';
 
 // ---------------------------------------------------------------------------
@@ -149,9 +149,6 @@ export function normaliseItems(parsed: unknown): ItemVerdict[] {
   });
 }
 
-/** Rule lookup by id, built once. */
-const RULES_BY_ID = new Map(POLICIES.map((r) => [r.ruleId, r]));
-
 /**
  * Enforce citation integrity.
  *
@@ -172,7 +169,7 @@ export function enforceCitationIntegrity(items: ItemVerdict[]): ItemVerdict[] {
   return items.map((item) => {
     if (!item.sourceRuleId) return item;
 
-    const rule = RULES_BY_ID.get(item.sourceRuleId);
+    const rule = getRuleById(item.sourceRuleId);
     const grounded = rule !== undefined && rule.verdict === item.verdict;
     if (grounded) return item;
 

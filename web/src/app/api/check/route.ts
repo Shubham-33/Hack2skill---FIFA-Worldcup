@@ -15,6 +15,7 @@ import { NextResponse } from 'next/server';
 import { answer } from '@/lib/llm';
 import { recordQuestions } from '@/lib/oplog';
 import { DEFAULT_VENUE } from '@/lib/policies';
+import { refreshPolicies } from '@/lib/sheets';
 import type { AccessProfile, CheckRequest, Mode } from '@/lib/types';
 
 /** Cap on free-text input. Long enough for a real question, short enough to bound cost. */
@@ -64,6 +65,10 @@ export async function POST(request: Request): Promise<NextResponse> {
   const venue = typeof body.venue === 'string' ? body.venue : DEFAULT_VENUE;
   const mode = coerceMode(body.mode);
   const profiles = coerceProfiles(body.profiles);
+
+  // Pick up any policy edits made in the Sheet. No-op while the cache is warm, and it
+  // never throws — a broken Sheet leaves the seed rules in force.
+  await refreshPolicies();
 
   const result = await answer(query, venue, mode, profiles, imageDataUrl);
 

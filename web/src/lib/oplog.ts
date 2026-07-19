@@ -16,11 +16,8 @@
  * durability guarantee the deployment cannot make.
  */
 
-import { POLICIES } from './policies';
+import { getRuleById } from './policies';
 import type { CheckResponse, ItemVerdict, Verdict } from './types';
-
-/** Rule lookup, used to resolve localised labels back to a canonical item name. */
-const RULES_BY_ID = new Map(POLICIES.map((r) => [r.ruleId, r]));
 
 /**
  * Resolve the tally key for an item.
@@ -36,7 +33,7 @@ const RULES_BY_ID = new Map(POLICIES.map((r) => [r.ruleId, r]));
  */
 function canonicalItem(item: ItemVerdict): { item: string; category: string } {
   if (item.sourceRuleId) {
-    const rule = RULES_BY_ID.get(item.sourceRuleId);
+    const rule = getRuleById(item.sourceRuleId);
     if (rule) return { item: rule.item, category: rule.category };
   }
   return { item: item.label.toLowerCase(), category: 'unmatched' };
