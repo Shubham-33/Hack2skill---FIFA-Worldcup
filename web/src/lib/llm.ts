@@ -46,6 +46,22 @@ const NVIDIA_ENDPOINT = 'https://integrate.api.nvidia.com/v1/chat/completions';
 const GEMINI_TIMEOUT_MS = 10_000;
 const NVIDIA_TIMEOUT_MS = 12_000;
 
+/**
+ * Tier-2 model, chosen on latency measured with the *real* prompt.
+ *
+ * The grounding prompt is ~9.3k characters and the response is structured JSON, which
+ * is far more work than a smoke-test ping. Measured 2026-07-19 on that actual payload:
+ *
+ *   meta/llama-3.2-90b-vision-instruct   29.4s   unusable as a fallback
+ *   nvidia/nemotron-nano-12b-v2-vl        8.1s   fits the budget, still multimodal
+ *   meta/llama-3.1-8b-instruct            2.7s   fastest, but text-only
+ *
+ * The 90B model was originally chosen on a `"say OK"` ping that returned in ~1s — a
+ * measurement that had nothing to do with the workload. Nemotron is the pick because it
+ * is the fastest option that still accepts images, so a photo survives failover.
+ */
+const DEFAULT_NVIDIA_MODEL = 'nvidia/nemotron-nano-12b-v2-vl';
+
 const VALID_VERDICTS: readonly Verdict[] = ['allowed', 'not_allowed', 'check_with_staff'];
 
 // ---------------------------------------------------------------------------
@@ -314,7 +330,7 @@ export async function answer(
   }
   const nvidiaKey = process.env.NVIDIA_API_KEY;
   if (nvidiaKey) {
-    const model = process.env.NVIDIA_MODEL || 'meta/llama-3.2-90b-vision-instruct';
+    const model = process.env.NVIDIA_MODEL || DEFAULT_NVIDIA_MODEL;
     attempts.push({ tier: 'nvidia', run: () => callNvidia(prompt, nvidiaKey, model, imageDataUrl) });
   }
 
