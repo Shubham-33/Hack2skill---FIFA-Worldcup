@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Lint
+        run: npx eslint .
+
+      # No secrets are configured for CI on purpose. The deterministic tier means the
+      # whole suite runs without an API key — if these tests ever start needing one,
+      # the offline guarantee has been broken and the build should fail.
+      - name: Test with 100% coverage gate
+        run: npm run test:cov
+
+      - name: Build
+        run: npm run build

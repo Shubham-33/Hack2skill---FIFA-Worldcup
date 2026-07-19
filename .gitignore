@@ -1,0 +1,41 @@
+# ── Secrets (never commit) ──
+.env
+.env.*
+!.env.example
+*.local
+credentials.json
+token.json
+service-account*.json
+
+# ── Working files, not part of the deliverable ──
+# The agent scaffold and planning notes live alongside the app on disk but are not
+# part of the published project. Keeping the repo single-purpose keeps a code review
+# focused on the code.
+.tmp/
+directives/
+execution/
+hackathon-playbook.md
+CLAUDE.md
+AGENTS.md
+GEMINI.md
+
+# ── Node / Next.js ──
+node_modules/
+.next/
+out/
+build/
+dist/
+.vercel/
+*.tsbuildinfo
+coverage/
+npm-debug.log*
+yarn-error.log*
+
+# ── Python (legacy scaffold) ──
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# ── OS ──
+.DS_Store
