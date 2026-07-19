@@ -4,6 +4,9 @@
 [![coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)](https://github.com/Shubham-33/Hack2skill---FIFA-Worldcup/actions/workflows/ci.yml)
 [![tests](https://img.shields.io/badge/tests-128-blue)](web/tests)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org)
+[![lighthouse](https://img.shields.io/badge/lighthouse-a11y%20100%20%C2%B7%20perf%2098-brightgreen)](https://hack2skill-fifa-worldcup.vercel.app)
+
+### ▶ Live: **[hack2skill-fifa-worldcup.vercel.app](https://hack2skill-fifa-worldcup.vercel.app)**  ·  [Organiser view](https://hack2skill-fifa-worldcup.vercel.app/ops)
 
 **Know before you go. Don't miss kickoff.**
 
@@ -162,6 +165,26 @@ telemetry, no AR, no native app, no external database. The Sheet is the database
 
 Policy data here is demonstration data modelled on real venue policies. It is **not**
 official FIFA guidance. Always confirm with your venue before travelling.
+
+## Verified, not assumed
+
+Measured against the deployed URL, not a local build:
+
+| Check | Result |
+|---|---|
+| Lighthouse Accessibility | **100** |
+| Lighthouse Best Practices | **100** |
+| Lighthouse SEO | **100** |
+| Lighthouse Performance | **98** |
+| Console errors | **0** |
+| Hydration | verified by clicking through the flow in headless Chrome |
+| Tests | 128 passing, 100% coverage gate, no API key required |
+
+> One bug this caught: an earlier `script-src 'self'` CSP blocked Next.js's own inline
+> bootstrap scripts. The page returned 200, the API answered `curl` correctly, and
+> Lighthouse still scored Accessibility 100 — while every button on the live site was
+> dead. No build, test, lint, or typecheck could see it. Driving the deployed URL in a
+> real browser is the only thing that did.
 
 ---
 
